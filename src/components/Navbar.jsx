@@ -9,6 +9,7 @@ const Navbar = () => {
   return (
     <nav>
         <Link to='/'>Home</Link>
+        <Link to='/search'>Search Companies</Link>
         {
             !getToken() &&
             <>

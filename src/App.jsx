@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import CompanySearch from "./pages/CompanySearch";
 
 function App() {
   const { getToken } = useContext(AuthContext);
@@ -25,6 +26,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route path="/search" element={<CompanySearch />} />
 
         <Route element={<IsLoggedOut />}>
           <Route path="/login" element={<Login />} />
