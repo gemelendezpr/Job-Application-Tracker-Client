@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/auth.context";
 
-const Login = () => {
+const Signin = () => {
   const [newUser, setNewUser] = useState({
     email: "",
     password: "",
@@ -23,7 +23,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    post("/auth/login", newUser)
+    post("/auth/signin", newUser)
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email
@@ -57,10 +57,10 @@ const Login = () => {
           />
         </label>
 
-        <button type="submit">Login</button>
+        <button type="submit">Sign In</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Signin;

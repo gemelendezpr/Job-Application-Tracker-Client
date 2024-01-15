@@ -38,7 +38,7 @@ const Signup = () => {
 
   return (
     <div>
-        <h1>Signup</h1>
+        <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
             <label>
                 Username
@@ -53,7 +53,7 @@ const Signup = () => {
                 <input name="password" type="password" value={newUser.password} onChange={handleTextInput} />
             </label>
 
-            <button type="submit">Signup</button>
+            <button type="submit">Sign Up</button>
         </form>
     </div>
   )

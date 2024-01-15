@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "./context/auth.context";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
+import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -13,7 +13,7 @@ function App() {
   const { getToken } = useContext(AuthContext);
 
   const IsLoggedIn = () => {
-    return getToken() ? <Outlet /> : <Navigate to="/login" />;
+    return getToken() ? <Outlet /> : <Navigate to="/signin" />;
   };
 
   const IsLoggedOut = () => {
@@ -21,24 +21,25 @@ function App() {
   };
 
   return (
-    <>
+    <div className="app-container">
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
+      <div className="content-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<CompanySearch />} />
 
-        <Route path="/search" element={<CompanySearch />} />
+          <Route element={<IsLoggedOut />}>
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+          </Route>
 
-        <Route element={<IsLoggedOut />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Route>
-
-        <Route element={<IsLoggedIn />}>
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-      </Routes>
-    </>
+          <Route element={<IsLoggedIn />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </div>
+    </div>
   );
 }
 
