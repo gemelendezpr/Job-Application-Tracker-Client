@@ -33,6 +33,30 @@ body{
   
 }
 
+.content-container {
+  margin-top: 80px; /* Add margin to position content below the navbar */
+}
+
+.job-review-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  
+}
+
+.job-review-card img {
+  width: 100px;
+  height: 100px;
+  margin-right: auto;
+} 
+
+
+
 /* .logo {
   height: 6em;
   padding: 1.5em;
