@@ -28,7 +28,7 @@ const Navbar = () => {
             <Search fontSize="large" />
           </IconButton>
           <IconButton component={Link} to="/add" color="inherit">
-            <AddCircleOutlineIcon fontSize="large"/>
+            <AddCircleOutlineIcon sx={{ fontSize: 40 }}/>
           </IconButton>
           {getToken() ? (
             <>
