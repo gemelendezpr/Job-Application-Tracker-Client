@@ -10,6 +10,9 @@ import Profile from "./pages/Profile";
 import CompanySearch from "./pages/CompanySearch";
 import JobReviewDetail from "./components/jobReviewDetail";
 import Footer from "./components/Footer";
+import AddInterview from "./pages/AddInterview";
+import CreateCompany from "./pages/CreateCompany";
+import CreateCompanyBlank from './pages/CreateCompanyBlank'
 
 function App() {
   const { getToken } = useContext(AuthContext);
@@ -32,7 +35,6 @@ function App() {
           <Route path="/search" element={<CompanySearch />} />
           <Route path="/job-reviews/:id" element={<JobReviewDetail />} />
           
-
           <Route element={<IsLoggedOut />}>
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
@@ -40,10 +42,13 @@ function App() {
 
           <Route element={<IsLoggedIn />}>
             <Route path="/profile" element={<Profile />} />
+            <Route path='/add' element={<AddInterview />} />
+            <Route path="/add-company/:companyName" element={<CreateCompany />} />
+            <Route path='/add-company' element={<CreateCompanyBlank />} />
           </Route>
         </Routes>
       </div>
-      <Footer />
+       <Footer />
     </div>
   );
 }

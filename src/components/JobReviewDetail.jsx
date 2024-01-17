@@ -20,8 +20,9 @@ const JobReviewDetail = () => {
     review: "Great company to work for!",
     details: "Join our team as one of the most successful omni-channel luxury family-owned Independent Jewelers and grow with us! We are seeking a dynamic developer to join our team and leverage your skills for website development, UX/UI, coding, content management, page building, conversion optimization, site speed, SEO, and overall functionality to help us achieve the best experience possible for our clients.", // Additional details
     location: "City, Country",
-    description: "Show test, exercises, code, etc",
+    challenges: "Show test, exercises, code, etc",
     interviewType: "Behavioral Interview",
+    interviewDifficulty: "Low",
     interviewDate: "2023-01-01",
     interviewer: "John Doe",
     linkedin: "https://linkedin.com/in/johndoe",
@@ -73,13 +74,16 @@ const JobReviewDetail = () => {
               Interview Date: {mockData.interviewDate}
             </Typography>
             <Typography variant="h6" color="textSecondary" gutterBottom>
+              Intervie Difficulty: {mockData.interviewDifficulty}
+            </Typography>
+            <Typography variant="h6" color="textSecondary" gutterBottom>
               Interviewer: {mockData.interviewer}
             </Typography>
             <Typography variant="h6" color="textSecondary" gutterBottom>
               LinkedIn: {mockData.linkedin}
             </Typography>
             <Typography variant="h6" color="textSecondary" gutterBottom>
-              Description: {mockData.description}
+              Challenges: {mockData.challenges}
             </Typography>
             <Typography variant="h6" color="textSecondary" gutterBottom>
               User Notes: {mockData.userNotes}
