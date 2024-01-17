@@ -58,15 +58,13 @@ body{
   margin-right: auto;
 } 
 
-.footer {
+/* .footer {
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
 }
-
-
-
+ */
 
 
 /* .logo {

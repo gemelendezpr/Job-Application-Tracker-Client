@@ -1,9 +1,11 @@
 import React from "react";
-import { Grid, Typography, Link } from "@mui/material";
+import { Grid, Typography, Link, Divider } from "@mui/material";
+import "./Footer.css";
 
 const Footer = () => {
   return (
-    <Grid container component="footer" justifyContent="center" alignItems="center" className="footer">
+    <footer className="footer">
+    <Divider className="divider" variant="middle" />
       <Grid item container justifyContent="space-around" alignItems="center" className="footer-content">
         <div className="footer-section">
           <Typography variant="h6" className="footer-section-title">Community</Typography>
@@ -54,7 +56,7 @@ const Footer = () => {
       <Typography variant="body2" className="footer-copyright">
         &copy; TechTea 2024 Inc. All rights reserved
       </Typography>
-    </Grid>
+    </footer>
   );
 };
 
