@@ -14,18 +14,22 @@ body{
   font-size: 1vw;
   line-height: 1.6;
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
+}
+
 .custom-navbar {
   border-radius: 50px; /* Adjust as needed */
   height: 48px;
-  width: auto;
+  /* width: auto; */
   margin-right: auto;
   margin-left: auto;
   justify-content: center;
-  width: fit-content;
+  /* width: fit-content; */
   padding: 20px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-box-pack: center;
   /* background-color: hsla(0,0%,100%,.03); */
   /* border: 1px solid #13043b; */
   /* text-align: center; */
@@ -33,7 +37,8 @@ body{
 }
 
 .content-container {
-  margin-top: 80px; /* Add margin to position content below the navbar */
+  margin-top: 80px;
+  flex:1; /* Add margin to position content below the navbar */
 }
 
 .job-review-card {
@@ -52,6 +57,15 @@ body{
   height: 100px;
   margin-right: auto;
 } 
+
+.footer {
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+
 
 
 

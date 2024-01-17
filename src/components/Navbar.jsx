@@ -24,8 +24,9 @@ const Navbar = () => {
       sx={{
         backgroundColor: "hsla(0, 0%, 100%, 0.08)",
         backdropFilter: "blur(6px)",
-        width: "fit-content",
+        width: "97%",
         zIndex: 1000,
+        marginLeft: "20px",
         marginRight: "20px",
         marginTop: "20px",
       }}
@@ -36,30 +37,30 @@ const Navbar = () => {
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <IconButton component={Link} to="/" color="inherit">
+          <IconButton component={Link} to="/" sx={{ color: "#2272FF" }}>
             <Home fontSize="large" />
           </IconButton>
-          <IconButton component={Link} to="/search" color="inherit">
+          <IconButton component={Link} to="/search" sx={{ color: "#2272FF" }}>
             <Search fontSize="large" />
           </IconButton>
-          <IconButton component={Link} to="/add" color="inherit">
+          <IconButton component={Link} to="/add" sx={{ color: "#2272FF" }}>
             <AddCircleOutlineIcon sx={{ fontSize: 40 }} />
           </IconButton>
           {getToken() ? (
             <>
-              <IconButton component={Link} to="/profile" color="inherit">
+              <IconButton component={Link} to="/profile" sx={{ color: "#2272FF" }}>
                 <Person fontSize="large" />
               </IconButton>
-              <IconButton onClick={logOutUser} color="inherit">
+              <IconButton onClick={logOutUser} sx={{ color: "#2272FF" }}>
                 <ExitToApp fontSize="large" />
               </IconButton>
             </>
           ) : (
             <>
-              <IconButton component={Link} to="/signin" color="inherit">
+              <IconButton component={Link} to="/signin" sx={{ color: "#2272FF" }}>
                 <Login fontSize="large" />
               </IconButton>
-              <IconButton component={Link} to="/signup" color="inherit">
+              <IconButton component={Link} to="/signup" sx={{ color: "#2272FF" }}>
                 <PersonAdd fontSize="large" />
               </IconButton>
             </>

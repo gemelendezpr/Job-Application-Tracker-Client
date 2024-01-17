@@ -26,8 +26,7 @@ const Home = () => {
         </Typography>
       </Stack>
       <Typography variant="body1" className="job-postings-description" style={{ padding: '16px 30px' }}>
-        Discover insightful interview experiences shared daily. We curate posts from companies actively conducting interviews, providing valuable insights for your job search journey.
-      </Typography>
+      Explore valuable interview experiences shared daily. We curate posts from individuals who have recently undergone interviews, offering insightful perspectives for your job search journey.      </Typography>
 
       {/* Search Bar */}
       <Grid item xs={12}>

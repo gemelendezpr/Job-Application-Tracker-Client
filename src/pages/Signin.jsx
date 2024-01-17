@@ -1,27 +1,33 @@
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { post } from "../services/authService";
-
-import { useContext, useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { AuthContext } from "../context/auth.context";
 
-const Signin = () => {
-  const [newUser, setNewUser] = useState({
-    email: "",
-    password: "",
-  });
-
+function SignIn() {
   const navigate = useNavigate();
+  const { storeToken, authenticateUser } = React.useContext(AuthContext);
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-  const handleTextInput = (e) => {
-    setNewUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const newUser = {
+      email: data.get('email'),
+      password: data.get('password'),
+    };
 
     post("/auth/signin", newUser)
       .then((response) => {
@@ -34,33 +40,77 @@ const Signin = () => {
       });
   };
 
+  const defaultTheme = createTheme();
+
   return (
-    <div>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            name="email"
-            type="email"
-            value={newUser.email}
-            onChange={handleTextInput}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            value={newUser.password}
-            onChange={handleTextInput}
-          />
-        </label>
-
-        <button type="submit">Sign In</button>
-      </form>
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        {/* Copyright component can be included here if needed */}
+      </Container>
+    </ThemeProvider>
   );
-};
+}
 
-export default Signin;
+export default SignIn;

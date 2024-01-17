@@ -45,14 +45,14 @@ const Footer = () => {
           <Link href="#" className="footer-link">
             <span className="footer-link-text">Learning about me</span>
           </Link>
-          <Link href="mailto:mifwebchain@gmail.com" className="footer-link">
-            <span className="footer-link-text">mifwebchain@gmail.com</span>
+          <Link href="mailto:techtea@gmail.com" className="footer-link">
+            <span className="footer-link-text">techtea@gmail.com</span>
           </Link>
         </div>
       </Grid>
 
       <Typography variant="body2" className="footer-copyright">
-        &copy; Gateway 2024 Inc. All rights reserved
+        &copy; TechTea 2024 Inc. All rights reserved
       </Typography>
     </Grid>
   );

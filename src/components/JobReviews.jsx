@@ -31,6 +31,22 @@ const JobReviews = () => {
         description: "Full-time, Retail",
         review: "Great company to work for!",
       },
+      {
+        id: 1,
+        company: "JR Dunn Jewelers",
+        position: "E-commerce Junior Web Developer",
+        logoUrl: "https://example.com/logo.png", // URL to the company logo
+        description: "Full-time, Retail",
+        review: "Great company to work for!",
+      },
+      {
+        id: 2,
+        company: "JR Dunn Jewelers",
+        position: "E-commerce Junior Web Developer",
+        logoUrl: "https://example.com/logo.png", // URL to the company logo
+        description: "Full-time, Retail",
+        review: "Great company to work for!",
+      },
       // Add more job reviews as needed
     ];
 
