@@ -23,6 +23,14 @@ const JobReviews = () => {
         description: "Full-time, Retail",
         review: "Great company to work for!",
       },
+      {
+        id: 2,
+        company: "JR Dunn Jewelers",
+        position: "E-commerce Junior Web Developer",
+        logoUrl: "https://example.com/logo.png", // URL to the company logo
+        description: "Full-time, Retail",
+        review: "Great company to work for!",
+      },
       // Add more job reviews as needed
     ];
 
@@ -30,10 +38,10 @@ const JobReviews = () => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
       {jobReviews.map((review) => (
-        <Grid item key={review.id} xs={11} sm={11} md={11.5} lg={11.75}>
-          <Card className="job-review-card" style={{ borderRadius: '25px' }}>
+        <Grid item key={review.id} xs={11} sm={11} md={11.5} lg={11.65}>
+          <Card className="job-review-card" style={{ borderRadius: '12px' }}>
             <Avatar className="job-review-card img" alt={review.company} src={review.logoUrl} />
             <CardContent >
               <Typography variant="h6" component="div">

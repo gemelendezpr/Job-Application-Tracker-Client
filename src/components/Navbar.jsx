@@ -1,8 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { AppBar, Toolbar, IconButton, Typography, Box } from "@mui/material";
-import { Home, Search, Add, Person, ExitToApp, Login, PersonAdd } from "@mui/icons-material";
+import {
+  Home,
+  Search,
+  Add,
+  Person,
+  ExitToApp,
+  Login,
+  PersonAdd,
+} from "@mui/icons-material";
 import { AuthContext } from "../context/auth.context";
 
 
@@ -11,29 +19,36 @@ const Navbar = () => {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       className="custom-navbar"
-      sx={{ backgroundColor: "hsla(0, 0%, 100%, 0.08)", backdropFilter: "blur(16px)", width: "fit-content" }}
+      sx={{
+        backgroundColor: "hsla(0, 0%, 100%, 0.08)",
+        backdropFilter: "blur(6px)",
+        width: "fit-content",
+        zIndex: 1000,
+        marginRight: "20px",
+        marginTop: "20px",
+      }}
     >
       <Toolbar>
-        {/* <Typography variant="h6" component={Link} to="/">
+        <Typography variant="h6" component={Link} to="/">
           Logo
-        </Typography> */}
+        </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <IconButton component={Link} to="/" color="inherit">
-            <Home fontSize="large"/>
+            <Home fontSize="large" />
           </IconButton>
           <IconButton component={Link} to="/search" color="inherit">
             <Search fontSize="large" />
           </IconButton>
           <IconButton component={Link} to="/add" color="inherit">
-            <AddCircleOutlineIcon sx={{ fontSize: 40 }}/>
+            <AddCircleOutlineIcon sx={{ fontSize: 40 }} />
           </IconButton>
           {getToken() ? (
             <>
               <IconButton component={Link} to="/profile" color="inherit">
-                <Person fontSize="large"/>
+                <Person fontSize="large" />
               </IconButton>
               <IconButton onClick={logOutUser} color="inherit">
                 <ExitToApp fontSize="large" />
@@ -42,10 +57,10 @@ const Navbar = () => {
           ) : (
             <>
               <IconButton component={Link} to="/signin" color="inherit">
-                <Login fontSize="large"/>
+                <Login fontSize="large" />
               </IconButton>
               <IconButton component={Link} to="/signup" color="inherit">
-                <PersonAdd fontSize="large"/>
+                <PersonAdd fontSize="large" />
               </IconButton>
             </>
           )}

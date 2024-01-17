@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import CompanySearch from "./pages/CompanySearch";
 import JobReviewDetail from "./components/jobReviewDetail";
+import Footer from "./components/Footer";
 
 function App() {
   const { getToken } = useContext(AuthContext);
@@ -41,6 +42,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
+        <Footer />
       </div>
     </div>
   );

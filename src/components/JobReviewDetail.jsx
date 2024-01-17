@@ -32,7 +32,7 @@ const JobReviewDetail = () => {
     <Grid container spacing={2}>
       {/* First Card */}
       <Grid item xs={12} sm={6}>
-        <Card style={{ borderRadius: '25px' }}>
+        <Card style={{ borderRadius: '12px' }}>
           <CardContent>
             <img src={mockData.logoUrl} alt={mockData.company} style={{ width: "100px", height: "100px" }} />
             <Typography variant="h4" gutterBottom>
@@ -47,7 +47,7 @@ const JobReviewDetail = () => {
 
       {/* Second Card */}
       <Grid item xs={12} sm={6}>
-        <Card style={{ borderRadius: '25px' }}>
+        <Card style={{ borderRadius: '12px' }}>
           <CardContent>
             <Typography variant="h6" color="textSecondary" gutterBottom>
               {mockData.position}
@@ -64,7 +64,7 @@ const JobReviewDetail = () => {
 
       {/* Third Card */}
       <Grid item xs={12}>
-        <Card style={{ borderRadius: '25px' }}>
+        <Card style={{ borderRadius: '12px' }}>
           <CardContent>
             <Typography variant="h6" color="textSecondary" gutterBottom>
               Interview Type: {mockData.interviewType}

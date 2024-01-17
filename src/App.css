@@ -8,7 +8,7 @@
 body{
   margin: 0;
   min-height: 100%;
-  background-color: #c7e1f3;
+  background-color: #efefef;
   font-size: 16px;
   color: #333;
   font-size: 1vw;
@@ -22,13 +22,12 @@ body{
   margin-left: auto;
   justify-content: center;
   width: fit-content;
-  padding: 4px;
+  padding: 20px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-box-pack: center;
   /* background-color: hsla(0,0%,100%,.03); */
-  border: 1px solid #13043b;
-  
+  /* border: 1px solid #13043b; */
   /* text-align: center; */
   
 }
@@ -39,14 +38,13 @@ body{
 
 .job-review-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
+  /* border: 1px solid #e0e0e0; */
   border-radius: 15px;
   padding: 16px;
   margin-bottom: 16px;
   display: flex;
   flex-direction: row;
   width: 100%;
-  
 }
 
 .job-review-card img {
