@@ -33,7 +33,7 @@ function SignInSide() {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/");
+        navigate("/profile");
       })
       .catch((err) => {
         console.log(err);
