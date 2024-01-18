@@ -40,9 +40,9 @@ const Navbar = () => {
           <IconButton component={Link} to="/" sx={{ color: "#2272FF" }}>
             <Home fontSize="large" />
           </IconButton>
-          <IconButton component={Link} to="/search" sx={{ color: "#2272FF" }}>
+          {/* <IconButton component={Link} to="/search" sx={{ color: "#2272FF" }}>
             <Search fontSize="large" />
-          </IconButton>
+          </IconButton> */}
           <IconButton component={Link} to="/add" sx={{ color: "#2272FF" }}>
             <AddCircleOutlineIcon sx={{ fontSize: 40 }} />
           </IconButton>

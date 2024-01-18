@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography, Select, MenuItem, Stack, FormControl, Input, Button } from "@mui/material";
 import JobReviews from "../components/JobReviews";
 import FilterCard from "../components/FilterCard";
@@ -12,9 +12,28 @@ const Home = () => {
   const [companyName, setCompanyName] = useState("");
   const [orderBy, setOrderBy] = useState("");
 
-  const handleOptionClick = (option, setOption) => {
+  const handleOptionClick = (option, setOption, filterType) => {
     setOption((prevOption) => (prevOption === option ? "" : option));
+    
+  let newFilter = {...filter}
+  console.log("index",newFilter[filterType] && newFilter[filterType].findIndex( (filter) => filter === option) > -1)
+  if (newFilter[filterType] && newFilter[filterType].findIndex( (filter) => filter === option) < 0) {
+    newFilter[filterType] = [...newFilter[filterType], option]
+  } else if ( newFilter[filterType] && newFilter[filterType].findIndex( (filter) => filter === option) > -1) {
+    newFilter[filterType].splice(newFilter[filterType].findIndex( (filter) => filter === option), 1)
+  } else if (!newFilter[filterType]){
+    newFilter[filterType] = [option]
+  }
+    setFilter(newFilter)
   };
+
+  const [filter, setFilter] = useState({
+    companyFilter: undefined,
+    locationFilter: undefined,
+    interviewTypeFilter: undefined,
+  });
+
+  useEffect (( ) => {console.log("filter", filter)}, [filter]) 
 
   return (
     <Grid container spacing={3}>
@@ -66,8 +85,11 @@ const Home = () => {
         <FilterCard
           title="Interview Type"
           options={["Full Time", "Contract", "Intern", "Part Time"]}
-          selectedOptions={[interviewType]}
-          handleOptionClick={(option) => handleOptionClick(option, setInterviewType)}
+          selectedOptions={[interviewType]} 
+          filter = {filter}
+          setFilter = {setFilter}
+          filterType = {"interviewTypeFilter"}
+          handleOptionClick={(option) => handleOptionClick(option, setInterviewType, "interviewTypeFilter")}
         />
 
         <FilterCard

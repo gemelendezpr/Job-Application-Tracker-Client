@@ -9,7 +9,7 @@ const JobReviews = () => {
 
 
   const getInterviews = () => {
-    get('/interview')
+    get('/interview', {params:{}})
       .then((response) => {
         console.log("All interviews", response.data)
         setJobReviews(response.data)
