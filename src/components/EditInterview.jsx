@@ -1,4 +1,6 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../context/auth.context";
+import { useParams } from "react-router-dom";
 
 import dayjs from 'dayjs';
 
@@ -18,21 +20,20 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
 import { useNavigate } from 'react-router-dom';
 
-import { get, post } from '../services/authService';
+import { post } from '../services/authService';
 
-import { AuthContext } from '../context/auth.context';
 
-import CreatableSelect from 'react-select/creatable';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const AddInterview = () => {
+const EditInterview = ({ interview, setIsEditing }) => {
+
+
+    const { id } = useParams(); // Retrieve the job review ID from the URL
 
     const { user } = useContext(AuthContext)
 
-    const [companies, setCompanies] = useState([])
-
-    const [interview, setInterview] = useState({
+    const [thisInterview, setThisInterview] = useState({
             user: user?._id,
             company: "",
             position: "",
@@ -50,78 +51,6 @@ const AddInterview = () => {
 
     const navigate = useNavigate()
 
-    const getCompanies = () => {
-        get('/company')
-            .then((response) => {
-                console.log("Found companies ===>", response.data)
-                setCompanies(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-    const sort = (array) => {
-        return array.sort((a, b) => a.companyName.localeCompare(b.companyName))
-    }
-
-    const theseCompanies = companies.length ? [...sort(companies), {_id: "", companyName: "Add new Company"}].map((company) => {
-        return { 
-            key: company._id,
-            label: company.companyName,
-            value: company.companyName   
-        }
-    }) : []
-
-    const theseOptions = companies.length ? theseCompanies : [{key: "", label: "Add new Company", value: "Add new Company"}]
-
-    const handleSelectChange = (e) => {
-
-        console.log("Select change")
-
-        if (!e) {
-            setInterview(() => ({        
-                user: user?._id,
-                company: "",
-                position: "",
-                review: "",
-                jobDetails: "",
-                location: "",
-                challenges: "",
-                interviewType: "",
-                interviewDifficulty: "",
-                interviewDate: new Date(),
-                interviewer: "",
-                linkedin: "",
-                userNotes: "",
-            }))
-        } else {
-            if (e.value === 'Add new Company') {
-                navigate('/add-company')
-            } else {
-                setInterview({        
-                    user: user?._id,
-                    company: e.key,
-                    position: "",
-                    review: "",
-                    jobDetails: "",
-                    location: "",
-                    challenges: "",
-                    interviewType: "",
-                    interviewDifficulty: "",
-                    interviewDate: new Date(),
-                    interviewer: "",
-                    linkedin: "",
-                    userNotes: "",
-                })
-            }
-        }
-    
-    }
-
-    const handleCreate = (name) => {
-        navigate(`/add-company/${name}`)
-      };
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -130,8 +59,8 @@ const AddInterview = () => {
         const data = new FormData(e.currentTarget);
 
         const newInterview = {
-            user: interview.user,
-            company: interview.company,
+            user: thisInterview.user._id,
+            company: interview.company._id,
           position: data.get('position'),
           review: data.get('review'),
           jobDetails: data.get('jobDetails'),
@@ -147,9 +76,10 @@ const AddInterview = () => {
     
         console.log("This is new company ====>", newInterview);
 
-        post('/interview', newInterview)
-            .then((response) => {
+        post(`/interview/update/${id}`, newInterview)
+                        .then((response) => {
                 console.log("Created Interview", response.data)
+                setIsEditing(false)
                 navigate("/profile")
             })
             .catch((err) => {
@@ -158,18 +88,20 @@ const AddInterview = () => {
     }
 
     useEffect(() => {
-        getCompanies()
-    }, []) 
+
+        setThisInterview(interview)
+        
+    }, [interview]) 
 
     const defaultTheme = createTheme();
 
   return (
     <div>
-        <h1>AddInterview</h1>
 
-        <CreatableSelect id="selector" isClearable options={theseOptions} onChange={handleSelectChange} onCreateOption={handleCreate}/>
 
-        { user && interview.company &&
+
+
+        { user && interview &&
         
         
         <ThemeProvider theme={defaultTheme}>
@@ -186,7 +118,7 @@ const AddInterview = () => {
               <BusinessIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Add Interview
+              Edit Interview
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -194,6 +126,7 @@ const AddInterview = () => {
                   <TextField
                     required
                     fullWidth
+                    defaultValue={interview.position}
                     id="position"
                     label="position"
                     name="position"
@@ -204,6 +137,7 @@ const AddInterview = () => {
                   <TextField
                     required
                     fullWidth
+                    defaultValue={interview.location}
                     id="location"
                     label="location"
                     name="location"
@@ -213,6 +147,7 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.review}
                     id="Review"
                     label="Review"
                     name="review"
@@ -222,6 +157,7 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.jobDetails}
                     id="JobDetails"
                     label="JobDetails"
                     name="jobDetails"
@@ -231,6 +167,7 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.challenges}
                     id="Challenges"
                     label="Challenges"
                     name="challenges"
@@ -240,6 +177,7 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.interviewType}
                     id="interviewType"
                     label="interviewType"
                     name="interviewType"
@@ -249,6 +187,7 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.interviewDifficulty}
                     id="interviewDifficulty"
                     label="interviewDifficulty"
                     name="interviewDifficulty"
@@ -258,13 +197,14 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
-                <DatePicker label="Interview Date" name="interviewDate" fullWidth defaultValue={dayjs(new Date())} />
+                <DatePicker label="Interview Date" name="interviewDate" fullWidth defaultValue={dayjs(interview.interviewDate)} />
                 </DemoContainer>
     </LocalizationProvider>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.interviewer}
                     id="interviewer"
                     label="interviewer"
                     name="interviewer"
@@ -274,6 +214,7 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.linkedin}
                     id="linkedin"
                     label="linkedin"
                     name="linkedin"
@@ -283,21 +224,14 @@ const AddInterview = () => {
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
+                    defaultValue={interview.userNotes}
                     id="userNotes"
                     label="userNotes"
                     name="userNotes"
                     autoComplete="userNotes"
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    id="logo"
-                    label="Logo URL"
-                    name="logo"
-                    autoComplete="logo"
-                  />
-                </Grid>
+
 
               </Grid>
               <Button
@@ -306,7 +240,7 @@ const AddInterview = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Submit Interview
+                Submit Changes
               </Button>
             </Box>
           </Box>
@@ -322,4 +256,4 @@ const AddInterview = () => {
   )
 }
 
-export default AddInterview
+export default EditInterview

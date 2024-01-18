@@ -9,10 +9,13 @@ import BusinessIcon from '@mui/icons-material/Business';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { post } from '../services/authService';
 
 const CreateCompany = () => {
   const { companyName } = useParams();
+
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,6 +32,15 @@ const CreateCompany = () => {
     };
 
     console.log("This is new company ====>", newCompany);
+
+    post('/company', newCompany)
+      .then((response) => {
+        console.log("Added company", response.data)
+        navigate('/add')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
     // Add your logic to handle the new company data, e.g., send it to the server or update state
   };

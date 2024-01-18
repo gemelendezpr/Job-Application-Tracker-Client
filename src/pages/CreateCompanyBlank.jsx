@@ -10,8 +10,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';  
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { post } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const CreateCompanyBlank = () => {
+
+  const navigate = useNavigate()
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -27,6 +32,15 @@ const CreateCompanyBlank = () => {
     };
 
     console.log("This is new company ====>", newCompany);
+
+    post('/company', newCompany)
+    .then((response) => {
+      console.log("Added company", response.data)
+      navigate('/add')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 
     // Logic Dustin
   };

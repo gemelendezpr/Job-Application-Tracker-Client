@@ -67,16 +67,14 @@ const Profile = () => {
   };
 
   const handleFileChange = (e) => {
-    const newPhoto = e.target.files[0];
     
-    // Create a local URL for previewing the selected image
+    const newPhoto = e.target.files[0];
     const newPhotoURL = URL.createObjectURL(newPhoto);
-  
-    // Update the user profile with the new photo and photo URL
+
     setUserProfile((prevProfile) => ({
       ...prevProfile,
       photo: newPhotoURL,
-      newPhoto, // Save the new photo file separately if needed for uploading
+      newPhoto,
     }));
   };
 
