@@ -80,10 +80,10 @@ const JobReviews = () => {
                 {review.company.companyName}
               </Typography>
               <Typography color="textSecondary" gutterBottom>
-                {review.position}
+                {review.review}
               </Typography>
               <Typography color="textSecondary" gutterBottom>
-                {review.description}
+                {review.position}
               </Typography>
               <Typography color="textSecondary" gutterBottom>
                 {review.location}

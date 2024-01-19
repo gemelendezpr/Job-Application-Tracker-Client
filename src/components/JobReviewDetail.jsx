@@ -46,7 +46,7 @@ const JobReviewDetail = () => {
           <Grid item xs={12} sm={6}>
             <Card style={{ borderRadius: '12px' }}>
               <CardContent>
-                <img src={interview.company.logo} alt={interview.company.companyName} style={{ width: "100px", height: "100px" }} />
+                {/* <img src={interview.company.logo} alt={interview.company.companyName} style={{ width: "100px", height: "100px" }} /> */}
                 <Typography variant="h4" gutterBottom>
                   {interview.company.companyName}
                 </Typography>
@@ -61,13 +61,13 @@ const JobReviewDetail = () => {
             <Card style={{ borderRadius: '12px' }}>
               <CardContent>
                 <Typography variant="h6" color="textSecondary" gutterBottom>
-                  {interview.position}
+                  Job Title: {interview.review}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                  {interview.location}
+                  Job Type: {interview.position}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                  {interview.description}
+                  Job Location: {interview.location}
                 </Typography>
               </CardContent>
             </Card>
@@ -92,7 +92,7 @@ const JobReviewDetail = () => {
                   LinkedIn: {interview.linkedin}
                 </Typography>
                 <Typography variant="h6" color="textSecondary" gutterBottom>
-                  Challenges:<TextField
+                  Interview Questions / Coding Challenges:<TextField
                     fullWidth
                     multiline
                     value={interview.challenges}
@@ -116,14 +116,14 @@ const JobReviewDetail = () => {
             <Grid item xs={12}>
               <Button
                 variant="contained"
-                style={{ marginRight: "8px", color: "#FFFFFF", backgroundColor: "#ffaf22" }}
+                style={{  marginBottom:"25px ",marginRight: "8px", color: "#FFFFFF", backgroundColor: "#ffaf22" }}
                 onClick={() => setIsEditing(!isEditing)}
               >
                 Edit
               </Button>
               <Button
                 variant="contained"
-                style={{ color: "#FFFFFF", backgroundColor: "#FF0000" }}
+                style={{ color: "#FFFFFF", backgroundColor: "#FF0000", marginBottom:"25px " }}
                 onClick={handleDelete}
               >
                 Delete

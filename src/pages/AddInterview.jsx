@@ -9,7 +9,11 @@ import Box from '@mui/material/Box';
 import BusinessIcon from '@mui/icons-material/Business';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';  // Import Paper component
+import Paper from '@mui/material/Paper';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import { DatePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -19,7 +23,6 @@ import { useNavigate } from 'react-router-dom';
 import { get, post } from '../services/authService';
 import { AuthContext } from '../context/auth.context';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 
 const AddInterview = () => {
   const { user } = useContext(AuthContext);
@@ -39,7 +42,7 @@ const AddInterview = () => {
     linkedin: '',
     userNotes: '',
   });
-
+  const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
 
   const getCompanies = () => {
@@ -107,12 +110,18 @@ const AddInterview = () => {
           linkedin: '',
           userNotes: '',
         });
+
+        setOpenDialog(true);
       }
     }
   };
 
   const handleCreate = (name) => {
     navigate(`/add-company/${name}`);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   const handleSubmit = (e) => {
@@ -157,36 +166,36 @@ const AddInterview = () => {
 
   return (
     <div>
-      <h1>AddInterview</h1>
+      <h1>Add Interview</h1>
 
       <CreatableSelect id="selector" isClearable options={theseOptions} onChange={handleSelectChange} onCreateOption={handleCreate} />
 
       {user && interview.company && (
         <ThemeProvider theme={defaultTheme}>
-          <Container component="main" maxWidth="xl">
-            <CssBaseline />
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
+          <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="xl">
+            <DialogTitle>
+              <Box display="flex" alignItems="center">
+                <Avatar sx={{ m: 1, bgcolor: '#2272FF' }}>
+                  <BusinessIcon />
+                </Avatar>
+                <Typography variant="h6" component="div" sx={{ ml: 2 }}>
+                  Add Interview
+                </Typography>
+              </Box>
+            </DialogTitle>
+            <DialogContent>
               <Paper elevation={2} square sx={{ borderRadius: 2, mt: 2, p: 2, maxWidth: '1200px', margin: 'auto' }}>
-              <Avatar sx={{ m: 1, bgcolor: '#2272FF' }}>
-                <BusinessIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Add Interview
-              </Typography>
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                   <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                      <TextField fullWidth id="Review" label="Job Title" name="review" autoComplete="Review" />
+                    </Grid>
                     <Grid item xs={12}>
                       <TextField
                         required
                         fullWidth
                         id="position"
-                        label="Position"
+                        label="Job Type"
                         name="position"
                         autoComplete="position"
                       />
@@ -195,13 +204,10 @@ const AddInterview = () => {
                       <TextField required fullWidth id="location" label="Location" name="location" autoComplete="location" />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField fullWidth id="Review" label="Review" name="review" autoComplete="Review" />
+                      <TextField fullWidth id="JobDetails" label="Job Overview" name="jobDetails" autoComplete="JobDetails" multiline rows={6} sx={{ height: 'auto' }}/>
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField fullWidth id="JobDetails" label="JobDetails" name="jobDetails" autoComplete="JobDetails" />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField fullWidth id="Challenges" label="Challenges" name="challenges" autoComplete="Challenges" multiline rows={6} sx={{ height: 'auto' }}/>
+                      <TextField fullWidth id="Challenges" label="Interview Questions / Coding Challenges" name="challenges" autoComplete="Challenges" multiline rows={6} sx={{ height: 'auto' }}/>
                     </Grid>
                     <Grid item xs={12}>
                       <TextField fullWidth id="interviewType" label="Interview Type" name="interviewType" autoComplete="interviewType" />
@@ -220,21 +226,31 @@ const AddInterview = () => {
                       <TextField fullWidth id="interviewer" label="Interviewer" name="interviewer" autoComplete="interviewer" />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField fullWidth id="linkedin" label="Linkedin" name="linkedin" autoComplete="linkedin" />
+                      <TextField fullWidth id="linkedin" label="Interviewer LinkedIn" name="linkedin" autoComplete="linkedin" />
                     </Grid>
                     <Grid item xs={12}>
                       <TextField fullWidth id="userNotes" label="User Notes" name="userNotes" autoComplete="userNotes" multiline rows={6} sx={{ height: 'auto' }} />
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                       <TextField fullWidth id="logo" label="Logo URL" name="logo" autoComplete="logo" />
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                   <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, bgcolor: '#2272FF' }}>
                     Submit Interview
                   </Button>
                 </Box>
               </Paper>
-            </Box>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog}>Cancel</Button>
+              {/* <Button onClick={handleSubmit} variant="contained" sx={{ bgcolor: '#2272FF' }}>
+                Submit Interview
+              </Button> */}
+            </DialogActions>
+          </Dialog>
+
+          <Container component="main" maxWidth="xl">
+            {/* Rest of the code remains the same */}
           </Container>
         </ThemeProvider>
       )}
