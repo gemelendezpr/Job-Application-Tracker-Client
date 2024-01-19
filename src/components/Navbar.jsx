@@ -12,6 +12,8 @@ import {
   PersonAdd,
 } from "@mui/icons-material";
 import { AuthContext } from "../context/auth.context";
+import Logo from "../assets/images/Logo.png"
+
 
 
 const Navbar = () => {
@@ -33,7 +35,7 @@ const Navbar = () => {
     >
       <Toolbar>
         <Typography variant="h6" component={Link} to="/">
-          Logo
+        <img src={Logo} alt="Logo" style={{ height: "55px", marginTop: "10px", }} />
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex", justifyContent: "center" }}>

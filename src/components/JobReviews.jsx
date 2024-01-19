@@ -85,7 +85,10 @@ const JobReviews = () => {
               <Typography color="textSecondary" gutterBottom>
                 {review.description}
               </Typography>
-              <Button variant="outlined" color="primary" href={`/job-reviews/${review._id}`}>
+              <Typography color="textSecondary" gutterBottom>
+                {review.location}
+              </Typography>
+              <Button variant="contained"   style={{ color: "#FFFFFF", backgroundColor: "#2272FF" }}  href={`/job-reviews/${review._id}`}>
                 View Details
               </Button>
             </CardContent>
