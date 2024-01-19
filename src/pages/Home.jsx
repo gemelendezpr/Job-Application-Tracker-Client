@@ -39,13 +39,13 @@ const Home = () => {
     <Grid container spacing={3}>
       {/* Sentences */}
       <Stack direction="row" spacing={3} className="job-postings-section" style={{ padding: '0px 30px' }}>
-        <Typography variant="h3" className="job-postings-heading">
+        <Typography variant="h3" className="job-postings-heading" style={{ fontWeight: 'bold' }}>
           Connect with valuable interview experiences
-          <span className="job-postings-subtext"> shared daily.</span>
+          <span className="job-postings-subtext" style={{ color: '#2272FF' }}> shared daily</span>
         </Typography>
       </Stack>
       <Typography variant="body1" className="job-postings-description" style={{ padding: '16px 30px' }}>
-      Explore valuable interview experiences shared daily. We curate posts from individuals who have recently undergone interviews, offering insightful perspectives for your job search journey.      </Typography>
+      Explore valuable interview experiences shared daily. We curate posts from individuals who have recently undergone interviews, offering insightful perspectives for your job search journey      </Typography>
 
       {/* Search Bar */}
       <Grid item xs={12}>
@@ -83,7 +83,7 @@ const Home = () => {
       <Grid item xs={12} md={4}>
         
         <FilterCard
-          title="Interview Type"
+          title="Job Type"
           options={["Full Time", "Contract", "Intern", "Part Time"]}
           selectedOptions={[interviewType]} 
           filter = {filter}
@@ -94,14 +94,14 @@ const Home = () => {
 
         <FilterCard
           title="Location"
-          options={["Location 1", "Location 2", "Location 3"]}
+          options={["California", "Florida", "New York"]}
           selectedOptions={[location]}
           handleOptionClick={(option) => handleOptionClick(option, setLocation)}
         />
 
         <FilterCard
-          title="Company Name"
-          options={["Company 1", "Company 2", "Company 3"]}
+          title="Company"
+          options={["Apple", "Google", "Microsoft"]}
           selectedOptions={[companyName]}
           handleOptionClick={(option) => handleOptionClick(option, setCompanyName)}
         />
