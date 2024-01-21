@@ -12,7 +12,8 @@ const Home = () => {
   const [companyName, setCompanyName] = useState("");
   const [orderBy, setOrderBy] = useState("");
 
-  // Work on this logic to add filter functionality 
+  // Work on this logic to add filter functionality by topic
+  // Add landing page
 
   const handleOptionClick = (option, setOption, filterType) => {
     setOption((prevOption) => (prevOption === option ? "" : option));
