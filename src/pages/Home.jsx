@@ -13,7 +13,7 @@ const Home = () => {
   const [orderBy, setOrderBy] = useState("");
 
   // Work on this logic to add filter functionality by topic
-  // Add landing page with animation features
+  // Add landing page with animation features to provide app mission and goals and functionalities
 
   const handleOptionClick = (option, setOption, filterType) => {
     setOption((prevOption) => (prevOption === option ? "" : option));
