@@ -4,74 +4,41 @@ import { Card, CardContent, Typography, Grid, Button, Avatar } from "@mui/materi
 
 import { get } from "../services/authService";
 
-const JobReviews = () => {
+const JobReviews = ({searchTerm}) => {
   const [jobReviews, setJobReviews] = useState([]);
 
 
   const getInterviews = () => {
-    get('/interview', {params:{}})
-      .then((response) => {
-        console.log("All interviews", response.data)
-        setJobReviews(response.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+    get('/interview', { params: { search: searchTerm } })
+    .then((response) => {
+      console.log("All interviews", response.data);
+      setJobReviews(response.data);
+    })
+    .catch((err) => {
+      console.log("API Error:", err);
+    });
+};
 
   useEffect(() => {
 
-    getInterviews()
-    // Fetch job reviews from your backend API or database
-    // Example API call or fetch logic
+    getInterviews();
+  }, [searchTerm]);
 
-    // const response = await fetch("your-api-endpoint");
-    // const data = await response.json();
-    // setJobReviews(data);
+  const filteredInterviews = jobReviews.filter((interview) => {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+  
+    const regex = new RegExp(lowerCaseSearchTerm.replace(/[-\s]/g, '[-\\s]?'), 'i');
 
-    // Example data for testing
-    // const mockData = [
-    //   {
-    //     id: 1,
-    //     company: "JR Dunn Jewelers",
-    //     position: "E-commerce Junior Web Developer",
-    //     logoUrl: "https://example.com/logo.png", // URL to the company logo
-    //     description: "Full-time, Retail",
-    //     review: "Great company to work for!",
-    //   },
-    //   {
-    //     id: 2,
-    //     company: "JR Dunn Jewelers",
-    //     position: "E-commerce Junior Web Developer",
-    //     logoUrl: "https://example.com/logo.png", // URL to the company logo
-    //     description: "Full-time, Retail",
-    //     review: "Great company to work for!",
-    //   },
-    //   {
-    //     id: 1,
-    //     company: "JR Dunn Jewelers",
-    //     position: "E-commerce Junior Web Developer",
-    //     logoUrl: "https://example.com/logo.png", // URL to the company logo
-    //     description: "Full-time, Retail",
-    //     review: "Great company to work for!",
-    //   },
-    //   {
-    //     id: 2,
-    //     company: "JR Dunn Jewelers",
-    //     position: "E-commerce Junior Web Developer",
-    //     logoUrl: "https://example.com/logo.png", // URL to the company logo
-    //     description: "Full-time, Retail",
-    //     review: "Great company to work for!",
-    //   },
-    //   // Add more job reviews as needed
-    // ];
-
-    // setJobReviews(mockData);
-  }, []);
+    return (
+      regex.test(interview.company.companyName.toLowerCase()) ||
+      regex.test(interview.location.toLowerCase()) ||
+      regex.test(interview.position.toLowerCase())
+    );
+  });
 
   return (
     <Grid container spacing={1}>
-      {jobReviews.map((review) => (
+      {filteredInterviews.map((review) => (
         <Grid item key={review.id} xs={11} sm={11} md={11.5} lg={11.65}>
           <Card className="job-review-card" style={{ borderRadius: '12px' }}>
             <Avatar className="job-review-card img" alt={review.company.companyName} src={review.company.logo} />

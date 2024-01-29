@@ -11,6 +11,7 @@ const Home = () => {
   const [location, setLocation] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [orderBy, setOrderBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Work on this logic to add filter functionality by topic
   // Add landing page with animation features to provide app mission and goals and functionalities
@@ -63,6 +64,8 @@ const Home = () => {
             }}
             placeholder="Search for interviews"
             type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <Button
             className="search-button"
@@ -79,6 +82,14 @@ const Home = () => {
             }}
           >
             Search
+          </Button>
+          {/* Clear Search Button */}
+          <Button
+            variant="outlined"
+            onClick={() => setSearchTerm("")}
+            sx={{ marginLeft: "10px" }}
+          >
+            Clear Search
           </Button>
         </Box>
       </Grid>
@@ -134,7 +145,7 @@ const Home = () => {
         </Stack>
 
         {/* Job Reviews Component */}
-        <JobReviews />
+        <JobReviews searchTerm={searchTerm} />
       </Grid>
     </Grid>
   );
