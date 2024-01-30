@@ -4,20 +4,21 @@ import { Card, CardContent, Typography, Grid, Button, Avatar } from "@mui/materi
 
 import { get } from "../services/authService";
 
-const JobReviews = ({searchTerm}) => {
+const JobReviews = ({searchTerm, updateFilters }) => {
   const [jobReviews, setJobReviews] = useState([]);
 
 
   const getInterviews = () => {
     get('/interview', { params: { search: searchTerm } })
-    .then((response) => {
-      console.log("All interviews", response.data);
-      setJobReviews(response.data);
-    })
-    .catch((err) => {
-      console.log("API Error:", err);
-    });
-};
+      .then((response) => {
+        console.log("All interviews", response.data);
+        setJobReviews(response.data);
+        updateFilters(response.data); // Call the callback function
+      })
+      .catch((err) => {
+        console.log("API Error:", err);
+      });
+  };
 
   useEffect(() => {
 
