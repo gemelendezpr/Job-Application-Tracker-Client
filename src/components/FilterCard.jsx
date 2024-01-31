@@ -1,21 +1,14 @@
+
 import React, { useState } from "react";
 import { Card, CardContent, Typography, Stack, Checkbox, FormControlLabel, IconButton } from "@mui/material";
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 
-const FilterCard = ({ title, options, selectedOptions, handleOptionClick, filter, filterType, setFilter }) => {
+const FilterCard = ({ title, options, selectedOptions, handleOptionClick, filterType, setFilter, handleCompanyFilter }) => {
   const [showOptions, setShowOptions] = useState(true);
-
-  const [check, setCheck] = useState(false);
 
   const toggleOptions = () => {
     setShowOptions((prev) => !prev);
   };
-
-  
-
-  // const handleOptionClick = (option) => {
-  //  console.log ("option", option)
-  // }
 
   return (
     <Card style={{ borderRadius: '12px', marginBottom: "16px" }}>
@@ -42,7 +35,7 @@ const FilterCard = ({ title, options, selectedOptions, handleOptionClick, filter
                 control={
                   <Checkbox
                     checked={selectedOptions.includes(option)}
-                    onChange={() => handleOptionClick (option)}
+                    onChange={() => handleOptionClick(option, setFilter, filterType, handleCompanyFilter)}
                     color="primary"
                   />
                 }
