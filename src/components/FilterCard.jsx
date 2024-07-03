@@ -1,13 +1,25 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, Typography, Stack, Checkbox, FormControlLabel, IconButton } from "@mui/material";
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 
-const FilterCard = ({ title, options, selectedOptions, handleOptionClick, filterType, setFilter, handleCompanyFilter }) => {
+const FilterCard = ({ title, options, selectedOptions, setFilter, filterType }) => {
   const [showOptions, setShowOptions] = useState(true);
 
   const toggleOptions = () => {
     setShowOptions((prev) => !prev);
+  };
+
+  const handleOptionClick = (option) => {
+    setFilter((prevFilter) => {
+      const isOptionSelected = prevFilter[filterType] && prevFilter[filterType].includes(option);
+  
+      return {
+        ...prevFilter,
+        [filterType]: isOptionSelected
+          ? prevFilter[filterType].filter((filter) => filter == option) // Deselect the option
+          : [option], // Select only the clicked option
+      };
+    });
   };
 
   return (
@@ -35,7 +47,7 @@ const FilterCard = ({ title, options, selectedOptions, handleOptionClick, filter
                 control={
                   <Checkbox
                     checked={selectedOptions.includes(option)}
-                    onChange={() => handleOptionClick(option, setFilter, filterType, handleCompanyFilter)}
+                    onChange={() => handleOptionClick(option)}
                     color="primary"
                   />
                 }

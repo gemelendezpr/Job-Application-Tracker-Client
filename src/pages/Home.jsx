@@ -30,18 +30,15 @@ const Home = () => {
     });
   };
 
-  const handleOptionClick = (option, setOption, filterType) => {
-    setOption((prevOption) => (prevOption === option ? "" : option));
-
-    let newFilter = { ...filter };
-    if (newFilter[filterType] && newFilter[filterType].findIndex((filter) => filter === option) < 0) {
-      newFilter[filterType] = [...newFilter[filterType], option];
-    } else if (newFilter[filterType] && newFilter[filterType].findIndex((filter) => filter === option) > -1) {
-      newFilter[filterType].splice(newFilter[filterType].findIndex((filter) => filter === option), 1);
-    } else if (!newFilter[filterType]) {
-      newFilter[filterType] = [option];
-    }
-    setFilter(newFilter);
+  const handleOptionClick = (option, filterType) => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      [filterType]: prevFilter[filterType]
+        ? prevFilter[filterType].includes(option)
+          ? prevFilter[filterType].filter((filter) => filter !== option)
+          : [...prevFilter[filterType], option]
+        : [option],
+    }));
   };
 
   useEffect(() => {
@@ -108,24 +105,27 @@ const Home = () => {
           title="Job Type"
           options={["Full Time", "Contract", "Intern", "Part Time"]}
           selectedOptions={[interviewType]}
-          filter={filter}
           setFilter={setFilter}
           filterType={"interviewTypeFilter"}
-          handleOptionClick={(option) => handleOptionClick(option, setInterviewType, "interviewTypeFilter")}
+          handleOptionClick={(option) => handleOptionClick(option, "interviewTypeFilter")}
         />
 
         <FilterCard
           title="Location"
           options={filter.locationFilter || ["California", "Florida", "New York"]}
           selectedOptions={[location]}
-          handleOptionClick={(option) => handleOptionClick(option, setLocation)}
+          setFilter={setFilter}
+          filterType={"locationFilter"}
+          handleOptionClick={(option) => handleOptionClick(option, "locationFilter")}
         />
 
         <FilterCard
           title="Company"
           options={filter.companyFilter || ["Apple", "Google", "Microsoft"]}
           selectedOptions={[companyName]}
-          handleOptionClick={(option) => handleOptionClick(option, setCompanyName)}
+          setFilter={setFilter}
+          filterType={"companyFilter"}
+          handleOptionClick={(option) => handleOptionClick(option, "companyFilter")}
         />
       </Grid>
 
@@ -152,7 +152,7 @@ const Home = () => {
         </Stack>
 
         {/* Job Reviews Component */}
-        <JobReviews searchTerm={searchTerm} updateFilters={updateFilters} />
+        <JobReviews searchTerm={searchTerm} updateFilters={updateFilters} filter={filter} />
       </Grid>
     </Grid>
   );
